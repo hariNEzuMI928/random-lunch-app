@@ -12,7 +12,7 @@
 export default {
   name: 'Random',
   mounted: function(){
-    document.title = "ランダム文字列";
+  //   document.title = "ランダム文字列";
   },
   props: ['chkTypeNum', 'chkTypeLow', 'chkTypeHigh', 'chkTypeSymbol'],
   data() {
