@@ -17,6 +17,11 @@ const routes = [
     name: 'RandomApp',
     component: () => import('../views/RandomApp.vue')
   },
+  {
+    path: '/signup',
+    name: 'Signup',
+    component: () => import('@/components/Signup')
+  },
 ]
 
 const router = createRouter({
