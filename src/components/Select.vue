@@ -3,25 +3,25 @@
     <label>
       <input type="checkbox"
         v-bind:checked="chkTypeNum"
-        v-on:change="$emit('chkTypeNumCheanged')"
+        v-on:change="$emit('chk-type-num-cheanged')"
       />数字
     </label>
     <label>
       <input type="checkbox"
         v-bind:checked="chkTypeLow"
-        v-on:change="$emit('chkTypeLowCheanged')"
+        v-on:change="$emit('chk-type-low-cheanged')"
       />英小文字
     </label>
     <label>
       <input type="checkbox"
         v-bind:checked="chkTypeHigh"
-        v-on:change="$emit('chkTypeHighCheanged')"
+        v-on:change="$emit('chk-type-high-cheanged')"
       />英大文字
     </label>
     <label>
       <input type="checkbox"
         v-bind:checked="chkTypeSymbol"
-        v-on:change="$emit('chkTypeSymbolCheanged')"
+        v-on:change="$emit('chk-type-symbol-cheanged')"
       />記号
     </label>
   </div>

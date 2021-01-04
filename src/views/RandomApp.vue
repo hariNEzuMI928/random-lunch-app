@@ -5,10 +5,10 @@
       v-bind:chkTypeLow="chkTypeLow"
       v-bind:chkTypeHigh="chkTypeHigh"
       v-bind:chkTypeSymbol="chkTypeSymbol"
-      v-on:chkTypeNumCheanged="chkTypeNum=!chkTypeNum"
-      v-on:chkTypeLowCheanged="chkTypeLow=!chkTypeLow"
-      v-on:chkTypeHighCheanged="chkTypeHigh=!chkTypeHigh"
-      v-on:chkTypeSymbolCheanged="chkTypeSymbol=!chkTypeSymbol"
+      v-on:chk-type-num-cheanged="chkTypeNum = !chkTypeNum"
+      v-on:chk-type-low-cheanged="chkTypeLow = !chkTypeLow"
+      v-on:chk-type-high-cheanged="chkTypeHigh = !chkTypeHigh"
+      v-on:chk-type-symbol-cheanged="chkTypeSymbol = !chkTypeSymbol"
     />
     <Random
       v-bind:chkTypeNum="chkTypeNum"
@@ -20,11 +20,11 @@
 </template>
 
 <script>
-import Random from '@/components/Random.vue';
-import Select from '@/components/Select.vue';
+import Random from "@/components/Random.vue";
+import Select from "@/components/Select.vue";
 
 export default {
-  name: 'RandomApp',
+  name: "RandomApp",
   components: {
     Select,
     Random,
