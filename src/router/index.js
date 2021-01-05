@@ -40,8 +40,8 @@ router.beforeResolve((to, from, next) => {
       if (user) {
         next()
       } else {
-        alert('ログインしてください');
-        console.log('未認証')
+        // alert('ログインしてください');
+        console.log('not authorized')
         next({ path: '/' })
       }
     })
