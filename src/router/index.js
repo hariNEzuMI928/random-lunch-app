@@ -23,6 +23,16 @@ const routes = [
     name: 'success',
     component: () => import('@/components/Success')
   },
+  {
+    path: '/fileUpload',
+    name: 'fileUpload',
+    component: () => import('../views/FileUpload.vue')
+  },
+  {
+    path: '/todo',
+    name: 'Todo',
+    component: () => import('../views/Todo.vue')
+  },
 ]
 
 const router = createRouter({
