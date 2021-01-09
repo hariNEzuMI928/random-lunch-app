@@ -1,17 +1,16 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-// import Home from '../views/Home.vue'
 import firebase from 'firebase'
 
 const routes = [
   {
-    path: '/about',
-    name: 'About',
-    component: () => import('../views/About.vue')
+    path: '/calendar',
+    name: 'Calendar',
+    component: () => import('@/components/Calendar')
   },
   {
     path: '/random',
     name: 'RandomApp',
-    component: () => import('../views/RandomApp.vue')
+    component: () => import('@/views/RandomApp.vue')
   },
   {
     path: '/',
@@ -26,12 +25,12 @@ const routes = [
   {
     path: '/fileUpload',
     name: 'fileUpload',
-    component: () => import('../views/FileUpload.vue')
+    component: () => import('@/views/FileUpload.vue')
   },
   {
     path: '/todo',
     name: 'Todo',
-    component: () => import('../views/Todo.vue')
+    component: () => import('@/views/Todo.vue')
   },
 ]
 

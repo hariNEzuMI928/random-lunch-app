@@ -1,13 +1,7 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h2>ログイン画面</h2>
-        <button type="button" @click="login" >ログイン</button>
-        <button type="button" @click="signUp" >登録</button>
-      </div>
-    </div>
-  </div>
+  <h2>ログイン画面</h2>
+  <button type="button" @click="login" >ログイン</button>
+  <button type="button" @click="signUp" >登録</button>
 </template>
 <style>
 .mt-2 {

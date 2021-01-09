@@ -10,8 +10,9 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "eslint-config-vue": "^2.0.2",
-    "firebase": "^8.2.1",
+    "firebase": "^8.2.2",
     "vue": "^3.0.5",
+    "vue-cal": "^4.2.0",
     "vue-router": "^4.0.0-0"
   },
   "devDependencies": {
