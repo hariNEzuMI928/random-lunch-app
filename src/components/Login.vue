@@ -30,7 +30,7 @@ export default {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         console.log('login!');
-        this.$router.push('/success')
+        this.$router.push('/home')
       }else{
         this.$router.push('/')
       }

@@ -17,17 +17,25 @@
       v-bind:chkTypeSymbol="chkTypeSymbol"
     />
   </div>
+  <hr />
+  <Todo />
+  <hr />
+  <FileUpload />
 </template>
 
 <script>
-import Random from "@/components/Random.vue";
-import Select from "@/components/Select.vue";
+import Random from '@/components/Random';
+import Select from '@/components/Select';
+import Todo from '@/components/Todo';
+import FileUpload from '@/components/FileUpload';
 
 export default {
-  name: "RandomApp",
+  name: 'RandomApp',
   components: {
     Select,
     Random,
+    Todo,
+    FileUpload,
   },
   data: function () {
     return {

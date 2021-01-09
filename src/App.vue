@@ -1,10 +1,7 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/calendar">Calendar</router-link> |
-    <router-link to="/random">Random</router-link> |
-    <router-link to="/fileUpload">FileUpload</router-link> |
-    <router-link to="/todo">Todo</router-link>
+    <router-link to="/home">Home</router-link> |
+    <router-link to="/random">Random</router-link>
     <router-view />
   </div>
 </template>

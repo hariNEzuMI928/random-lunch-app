@@ -6,7 +6,7 @@
     </label>
     <button type="button" @click="createTodo">作成</button>
 
-    <hr />
+    <br />
     <div>
       <button type="button" @click="showTodoType = 'all'">すべて</button> |
       <button type="button" @click="showTodoType = 'active'">未完了</button> |

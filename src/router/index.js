@@ -3,16 +3,6 @@ import firebase from 'firebase'
 
 const routes = [
   {
-    path: '/calendar',
-    name: 'Calendar',
-    component: () => import('@/components/Calendar')
-  },
-  {
-    path: '/random',
-    name: 'RandomApp',
-    component: () => import('@/views/RandomApp.vue')
-  },
-  {
     path: '/',
     name: 'login',
     component: () => import('@/components/Login')
@@ -23,14 +13,14 @@ const routes = [
     component: () => import('@/components/Success')
   },
   {
-    path: '/fileUpload',
-    name: 'fileUpload',
-    component: () => import('@/views/FileUpload.vue')
+    path: '/home',
+    name: 'Home',
+    component: () => import('@/views/Home')
   },
   {
-    path: '/todo',
-    name: 'Todo',
-    component: () => import('@/views/Todo.vue')
+    path: '/random',
+    name: 'RandomApp',
+    component: () => import('@/views/RandomApp')
   },
 ]
 
