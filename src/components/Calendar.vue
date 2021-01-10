@@ -5,6 +5,7 @@
   />
   <vue-cal
     class="vuecal--blue-theme"
+    style="height: 800px"
     :events="events"
     :selected-date="selectedDate"
     hide-weekends
@@ -15,13 +16,17 @@
     events-on-month-view
     :on-event-click="onEventClick"
   />
+
+  <button @click="applyForLunch">ランチを申し込む</button>
 </template>
 
 <script>
 import VueCal from "vue-cal";
 import "vue-cal/dist/vuecal.css";
+import firebase from "firebase";
 
-const icon = '<i class="v-icon material-icons mt-1">local_cafe</i>';
+const icon =
+  '<i class="v-icon material-icons mt-1" style="font-size: small">local_cafe</i>';
 const templateMsg = {
   held: {
     title: icon + "Lunch開催",
@@ -43,7 +48,7 @@ export default {
     VueCal,
   },
   data() {
-    return {
+    return { // TODO: DBからデータを取得する
       selectedDate: new Date(),
       events: [
         {
@@ -89,8 +94,18 @@ export default {
       ],
     };
   },
-  // methods: {
-  // },
+  created: function () {
+    this.database = firebase.database();
+    this.ref = this.database.ref("willBeHeld");
+  },
+  methods: {
+    applyForLunch() {
+      this.ref.push({
+        name: "test", // TODO: 認証情報から名前を入れる
+        day: "2021-01-15",
+      });
+    },
+  },
 };
 </script>
 
