@@ -47,7 +47,7 @@ export default {
     this.ref = this.database.ref('todos');
   },
   mounted() {
-    this.ref.on('value', (snapshot) => (this.todos = snapshot.val()));
+    this.ref.on('value', snapshot => this.todos = snapshot.val());
   },
   computed: {
     filteredTodos: function () {

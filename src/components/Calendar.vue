@@ -3,19 +3,24 @@
     href="https://fonts.googleapis.com/icon?family=Material+Icons"
     rel="stylesheet"
   />
-  <vue-cal
-    class="vuecal--blue-theme"
-    style="height: 800px"
-    :events="events"
-    :selected-date="selectedDate"
-    hide-weekends
-    :time-from="8 * 60"
-    :time-to="19 * 60"
-    active-view="month"
-    :disable-views="['years', 'year', 'day']"
-    events-on-month-view
-    :on-event-click="onEventClick"
-  />
+  <div v-if="events.length">
+    <vue-cal
+      class="vuecal--blue-theme"
+      style="height: 800px"
+      :events="events"
+      :selected-date="selectedDate"
+      hide-weekends
+      :time-from="8 * 60"
+      :time-to="19 * 60"
+      active-view="month"
+      :disable-views="['years', 'year', 'day']"
+      events-on-month-view
+    />
+  </div>
+  <div v-if="!events.length">
+    <br />
+    <h1>Loading...</h1>
+  </div>
 
   <button @click="applyForLunch">ランチを申し込む</button>
 </template>
@@ -25,22 +30,23 @@ import VueCal from "vue-cal";
 import "vue-cal/dist/vuecal.css";
 import firebase from "firebase";
 
-const icon =
-  '<i class="v-icon material-icons mt-1" style="font-size: small">local_cafe</i>';
-const templateMsg = {
-  held: {
-    title: icon + "Lunch開催",
-    contentFull: "本日ランダムランチが開催されます",
-  },
-  willBeHeld: {
-    title: icon + "Lunch応募中",
+const templateClass = ["willBeHeld", "held", "notHeld"];
+const templateMsg = [
+  {
+    title: "Lunch応募中",
     contentFull: "ランダムランチに応募中です。\n結果は当日分かります。",
   },
-  notHeld: {
-    title: icon + "Lunchリスケ",
+  {
+    title: "Lunch開催",
+    contentFull: "本日ランダムランチが開催されます",
+  },
+  {
+    title: "Lunchリスケ",
     contentFull: "本日のランダムランチはメンバー不足のため中止されました。",
   },
-};
+];
+const icon =
+  '<i class="v-icon material-icons mt-1" style="font-size: small">local_cafe</i>';
 
 export default {
   name: "Calendar",
@@ -48,61 +54,43 @@ export default {
     VueCal,
   },
   data() {
-    return { // TODO: DBからデータを取得する
+    return {
       selectedDate: new Date(),
-      events: [
-        {
-          start: "2021-01-12 12:00",
-          end: "2021-01-12 13:00",
-          title: templateMsg.held.title,
-          contentFull: templateMsg.held.contentFull,
-          class: "held",
-          background: true,
-        },
-        {
-          start: "2021-01-13 12:00",
-          end: "2021-01-13 13:00",
-          title: templateMsg.held.title,
-          contentFull: templateMsg.held.contentFull,
-          class: "held",
-          background: true,
-        },
-        {
-          start: "2021-01-15 12:00",
-          end: "2021-01-15 13:00",
-          title: templateMsg.willBeHeld.title,
-          contentFull: templateMsg.willBeHeld.contentFull,
-          class: "willBeHeld",
-          background: true,
-        },
-        {
-          start: "2021-01-018 12:00",
-          end: "2021-01-18 13:00",
-          title: templateMsg.notHeld.title,
-          contentFull: templateMsg.notHeld.contentFull,
-          class: "notHeld",
-          background: true,
-        },
-        {
-          start: "2021-01-20 12:00",
-          end: "2021-01-20 13:00",
-          title: templateMsg.willBeHeld.title,
-          contentFull: templateMsg.willBeHeld.contentFull,
-          class: "willBeHeld",
-          background: true,
-        },
-      ],
+      events: [],
     };
   },
   created: function () {
-    this.database = firebase.database();
-    this.ref = this.database.ref("willBeHeld");
+    this.ref = firebase.database().ref("lunch");
+  },
+  mounted() {
+    this.ref.on("value", () => this.getEvents());
   },
   methods: {
+    getEvents() {
+      this.events = [];
+      this.ref.on("value", (snapshot) => {
+        for (const [key, record] of Object.entries(snapshot.val())) {
+          key;
+          let event = {
+            start:       record.day + " 12:00",
+            end:         record.day + " 13:00",
+            title:       icon + templateMsg[record.state].title,
+            contentFull: templateMsg[record.state].contentFull,
+            class:       templateClass[record.state],
+          };
+          this.events.push(event);
+        }
+      });
+    },
+    // TODO: 追加後に重複データが描画されてしまう
     applyForLunch() {
-      this.ref.push({
-        name: "test", // TODO: 認証情報から名前を入れる
-        day: "2021-01-15",
+      firebase.auth().onAuthStateChanged(user => {
+        this.ref.push({
+          email: user.email,
+          state: "2",
+          // TODO: 任意の日付
+          day: "2021-01-11",
+        });
       });
     },
   },
