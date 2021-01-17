@@ -22,6 +22,7 @@
     <h1>Loading...</h1>
   </div>
 
+  <input type="date" v-model="newApplyForLunchDate" />
   <button @click="applyForLunch">ランチを申し込む</button>
 </template>
 
@@ -72,11 +73,11 @@ export default {
         for (const [key, record] of Object.entries(snapshot.val())) {
           key;
           let event = {
-            start:       record.day + " 12:00",
-            end:         record.day + " 13:00",
-            title:       icon + templateMsg[record.state].title,
+            start: record.day + " 12:00",
+            end: record.day + " 13:00",
+            title: icon + templateMsg[record.state].title,
             contentFull: templateMsg[record.state].contentFull,
-            class:       templateClass[record.state],
+            class: templateClass[record.state],
           };
           this.events.push(event);
         }
@@ -84,13 +85,14 @@ export default {
     },
     // TODO: 追加後に重複データが描画されてしまう
     applyForLunch() {
-      firebase.auth().onAuthStateChanged(user => {
-        this.ref.push({
-          email: user.email,
-          state: "2",
-          // TODO: 任意の日付
-          day: "2021-01-11",
-        });
+      firebase.auth().onAuthStateChanged((user) => {
+        if (this.newApplyForLunchDate) {
+          this.ref.push({
+            email: user.email,
+            state: "0",
+            day: this.newApplyForLunchDate,
+          });
+        }
       });
     },
   },
