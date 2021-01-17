@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     getEvents() {
-      this.events = [];
+      var events = [];
       this.ref.on("value", (snapshot) => {
         for (const [key, record] of Object.entries(snapshot.val())) {
           key;
@@ -79,21 +79,21 @@ export default {
             contentFull: templateMsg[record.state].contentFull,
             class: templateClass[record.state],
           };
-          this.events.push(event);
+          events.push(event);
         }
       });
+      this.events = events;
     },
-    // TODO: 追加後に重複データが描画されてしまう
     applyForLunch() {
-      firebase.auth().onAuthStateChanged((user) => {
-        if (this.newApplyForLunchDate) {
+      if (this.newApplyForLunchDate) {
+        firebase.auth().onAuthStateChanged((user) => {
           this.ref.push({
             email: user.email,
             state: "0",
             day: this.newApplyForLunchDate,
           });
-        }
-      });
+        });
+      }
     },
   },
 };
